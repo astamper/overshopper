@@ -1,0 +1,38 @@
+<div class="well well-small">
+  <div class="pull-right" data-intro="Reset the filter settings to defaults." data-position="bottom">
+    <%= link_to "Reset filters", reset_filterrific_url, :class => 'btn btn-default btn-sm' %>
+  </div>
+  <div class="chardin_box" data-intro="will_paginate's entries info works as expected." data-position="bottom">
+    <%= page_entries_info televisions, :model => 'television' %>
+  </div>
+  <div class="chardin_box" data-intro="Spinner indicates update." data-position="bottom">
+    <%= render_filterrific_spinner %>
+  </div>
+</div>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Brand</th>
+    <th>Registered at</th>
+  </tr>
+  <% televisions.each do |television| %>
+  <tr>
+    <td>
+    <%= television.name %> <!-- this is the wierd thing -->
+    </td>
+    <td>
+      <%= television.modelnumber %>
+    </td>
+    <td>
+      <%= television.brand %>
+    </td>
+    <td>
+      <%= television.created_at.to_date.to_s(:long) %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<div class="chardin_box" data-intro="will_paginate's paginator works as expected." data-position="top">
+  <%= will_paginate televisions, renderer: BootstrapPagination::Rails %>
+</div>
