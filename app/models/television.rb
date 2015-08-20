@@ -1,11 +1,11 @@
 class Television < ActiveRecord::Base
 
-  filterrific :default_filter_params => { :sorted_by => 'created_at_desc' },
+  filterrific :default_filter_params => { :sorted_by => 'regularprice_desc' },
               :available_filters => %w[
                 sorted_by
                 search_query
                 with_brand
-                with_created_at_gte
+                with_regularprice
               ]
 
   # default for will_paginate
@@ -40,8 +40,8 @@ class Television < ActiveRecord::Base
     # extract the sort direction from the param value.
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
     case sort_option.to_s
-    when /^created_at_/
-      order("televisions.created_at #{ direction }")
+    when /^regularprice_/
+      order("televisions.regularprice #{ direction }")
     when /^brand_/
       order("LOWER(televisions.brand) #{ direction }")
     when /^name_/
@@ -53,8 +53,8 @@ class Television < ActiveRecord::Base
   scope :with_brand, lambda { |brands|
     where(:brand => [*brands])
   }
-  scope :with_created_at_gte, lambda { |ref_date|
-    where('televisions.created_at >= ?', ref_date)
+  scope :with_regularprice, lambda { |ref_price|
+    where('televisions.regularprice >= ?', ref_price)
   }
 
   delegate :name, :to => :brand, :prefix => true
@@ -62,8 +62,8 @@ class Television < ActiveRecord::Base
   def self.options_for_sorted_by
     [
       ['Name (a-z)', 'name_asc'],
-      ['Registration date (newest first)', 'created_at_desc'],
-      ['Registration date (oldest first)', 'created_at_asc'],
+      ['Price (High to Low)', 'regularprice_desc'],
+      ['Price (Low to High)', 'regularprice_asc'],
       ['Brand (a-z)', 'brand_asc']
     ]
   end
@@ -74,6 +74,6 @@ class Television < ActiveRecord::Base
 
   def self.options_for_select
     order('LOWER(brand)').map{ |e| [e.brand] }.uniq
-   # order('LOWER(brand)').select{ |e| order('LOWER(brand)').count(e) > 1 }.uniq
+
   end
 end
