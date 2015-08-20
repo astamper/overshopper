@@ -1,0 +1,81 @@
+
+
+
+<div class="col-sm-4 col-md-3 col-lg-2 hidden-xs"  id="myScrollspy">
+  <%= render 'sidebar' %>
+</div>
+<div class="col-sm-8 col-md-9 hidden-xs content" >
+  <div class="item"><section id="section1"> <%= render 'filter/tvprice' %></section> </div>
+  <div class="item"><section id="section2"> <%= render 'tvsize' %></section> </div>
+  <div class="item"><section id="section3"> <%= render 'tvresolution' %></section> </div>
+</div>
+<div class="visible-xs">
+  <div class="slick-slider" id="single-page">
+    <div class="item"><%= render 'filter/tvprice' %></div>
+    <div class="item"><%= render 'tvsize' %></div>
+    <div class="item"><div STYLE="padding: 50px">
+     <%= form_for_filterrific @filterrific do |f| %>
+     <div class="row">
+      <%= f.select(:with_brand, @filterrific.select_options[:with_brand], {include_blank: '- Any -' }, { :class => 'form-control' })%>
+    </div>
+
+    <% end %>
+  </div></div>
+</div>
+</div>
+</div>
+
+
+
+
+<nav class="navbar-fixed-bottom visible-xs">
+  <style type="text/css">
+    #sidebottombutton {
+      position: absolute;
+      bottom:0px;
+      width: 100%;
+      height: 50px;
+      background: green;
+      padding-top: 10px;
+    }
+    h3 {
+      margin-top: 0px;
+    }
+  </style>
+
+
+
+
+  <a href="/tv-result" style="text-decoration: none">
+    <div id="sidebottombutton">
+      <h3 class="text-center">
+        <font color="white">
+          <div id="results">
+            <%= render(
+              partial: 'televisions/modelcount',
+              locals: { televisions: @televisions }
+              ) %>
+            </div>
+          </font>
+        </h3>
+      </div>
+    </a>
+
+
+  </nav>
+  <script type="text/javascript">
+    $(document).ready(function() {
+     $('.slick-slider').slick({
+       dots: false,
+       adaptiveHeight: true,
+       accessibility: false,
+       draggable: true,
+       arrows:false,
+     });
+   });
+  </script>
+
+
+
+
+

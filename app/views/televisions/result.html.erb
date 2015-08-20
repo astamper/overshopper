@@ -25,10 +25,13 @@
         </div>
         <div class="col-md-2">
           <div class="form-group chardin_box" data-intro="Filter by registration date." data-position="top">
-            <label>Registered after</label>
-            <%= f.text_field(:with_regularprice, class: 'js-datepicker form-control') %>
+            <label>Price</label>
+            <!-- <#%= f.text_field(:with_regularprice, class: 'js-datepicker form-control') %> -->
+
+             <%= f.check_box(:with_test, class: 'filterrific-periodically-observed') %> LED
           </div>
         </div>
+
         <div class="col-md-4">
           <div class="form-group chardin_box" data-intro="Change the sorting." data-position="top">
             <label>Sorted by</label>
@@ -38,6 +41,7 @@
       </div>
       <% end %>
     </div>
+
     <div id="results">
       <%= render(
         partial: 'televisions/list',

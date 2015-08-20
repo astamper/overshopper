@@ -12,9 +12,9 @@
 <table class="table">
   <tr>
     <th>Name</th>
-    <th>Email</th>
+    <th>Type</th>
     <th>Brand</th>
-    <th>Registered at</th>
+    <th>Price</th>
   </tr>
   <% televisions.each do |television| %>
   <tr>
@@ -22,7 +22,7 @@
     <%= television.name %> <!-- this is the wierd thing -->
     </td>
     <td>
-      <%= television.modelnumber %>
+      <%= television.tvtype %>
     </td>
     <td>
       <%= television.brand %>

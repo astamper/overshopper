@@ -5,6 +5,7 @@ class Television < ActiveRecord::Base
                 sorted_by
                 search_query
                 with_brand
+                with_test
                 with_regularprice
               ]
 
@@ -55,6 +56,13 @@ class Television < ActiveRecord::Base
   }
   scope :with_regularprice, lambda { |ref_price|
     where('televisions.regularprice >= ?', ref_price)
+  }
+  scope :with_test, lambda { |check|
+    if 1 == check
+      return where(:tvtype => "LED")
+    else
+      return nil
+    end
   }
 
   delegate :name, :to => :brand, :prefix => true
