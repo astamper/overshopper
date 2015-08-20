@@ -19,7 +19,7 @@
   <% televisions.each do |television| %>
   <tr>
     <td>
-    <%= television.name %> <!-- this is the wierd thing -->
+    <a href="<%= television.url %>"><%= television.name %></a>
     </td>
     <td>
       <%= television.tvtype %>

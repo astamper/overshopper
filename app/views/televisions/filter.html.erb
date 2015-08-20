@@ -10,23 +10,27 @@
   <div class="item"><section id="section3"> <%= render 'tvresolution' %></section> </div>
 </div>
 <div class="visible-xs">
+  <%= form_for_filterrific @filterrific do |f| %>
   <div class="slick-slider" id="single-page">
     <div class="item"><%= render 'filter/tvprice' %></div>
+    <div class="item"><%= f.check_box(:with_test, class: 'filterrific-periodically-observed') %> LED
+    </br><p>TV types
+This isn't as much of a decision as it used to be because almost all TVs now on the market are LCD TVs that use LEDs instead of fluorescent bulbs for backlighting the screen.  Most manufacturers and retailers refer to them as LED TVs. (When we refer to LCD TVs in this buying guide, that includes models using LED backlights.)
+
+Plasma TVs are just about gone from the market, and manufacturers are no longer producing them.
+
+There's a new type of TV available that uses another display technology—OLED, which stands for organic light emitting diode. At this point, there's only one brand (LG) making them, but we expect to see more in the future.
+3D TVs and Ultra HD TVs aren't different types of TVs. They are LCD/LED or OLED sets that have these capabilities. Many new models can display 3D images as well as regular HD. Ultra HD TVs, or UHD TVs for short, are LCD/LED sets with have higer-resolution screen that are capable of displaying more detail. OLED displays with UHD resolution are expected to arrive soon.</p>
+    </div>
     <div class="item"><%= render 'tvsize' %></div>
     <div class="item"><div STYLE="padding: 50px">
-     <%= form_for_filterrific @filterrific do |f| %>
-     <div class="row">
-      <%= f.select(:with_brand, @filterrific.select_options[:with_brand], {include_blank: '- Any -' }, { :class => 'form-control' })%>
+      <div class="row">
+        <%= f.select(:with_brand, @filterrific.select_options[:with_brand], {include_blank: '- Any -' }, { :class => 'form-control' })%>
+      </div>
     </div>
-
-    <% end %>
-  </div></div>
-</div>
-</div>
-</div>
-
-
-
+  </div>
+  <% end %>
+  </div>
 
 <nav class="navbar-fixed-bottom visible-xs">
   <style type="text/css">

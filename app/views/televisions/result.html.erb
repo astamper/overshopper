@@ -1,11 +1,22 @@
-<div class="page-header" style="margin-bottom: 70px;">
+<div class="page-header" style="margin-bottom: 10px;">
   <div class="pull-right">
     <a href="/tv">Home</a>
   </div>
-  <h1 class="chardin_box" data-intro="This is a demo for filterrific. Filter and sort the list of students. Click anywhere to remove the overlay." data-position="right">
+  <h1>
     Students
   </h1>
+
 </div>
+
+
+<button class="btn btn-block btn-default" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom: 10px;">
+  Filters
+</button>
+<div class="collapse" id="collapseExample">
+
+
+
+
 <div class="well">
   <%= form_for_filterrific @filterrific do |f| %>
   <div class="row">
@@ -25,7 +36,7 @@
         </div>
         <div class="col-md-2">
           <div class="form-group chardin_box" data-intro="Filter by registration date." data-position="top">
-            <label>Price</label>
+            <label>Technology</label>
             <!-- <#%= f.text_field(:with_regularprice, class: 'js-datepicker form-control') %> -->
 
              <%= f.check_box(:with_test, class: 'filterrific-periodically-observed') %> LED
@@ -41,7 +52,7 @@
       </div>
       <% end %>
     </div>
-
+</div>
     <div id="results">
       <%= render(
         partial: 'televisions/list',
