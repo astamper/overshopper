@@ -5,10 +5,7 @@
   <h1>
     Televisions
   </h1>
-
 </div>
-
-
 <button class="btn btn-block btn-default" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-bottom: 10px;">
   Filters
 </button>
@@ -37,8 +34,6 @@
         <div class="col-md-2">
           <div class="form-group chardin_box" data-intro="Filter by registration date." data-position="top">
             <label>Technology</label>
-            <!-- <#%= f.text_field(:with_regularprice, class: 'js-datepicker form-control') %> -->
-
              <%= f.check_box(:with_test, class: 'filterrific-periodically-observed') %> LED
           </div>
         </div>
@@ -53,12 +48,10 @@
       <% end %>
     </div>
 </div>
-    <div id="results">
-      <%= render(
-        partial: 'televisions/list',
-        locals: { televisions: @televisions }
-        ) %>
-      </div>
-      <script>
-        $('.js-datepicker').datepicker();
-      </script>
+<div id="results">
+  <%= render(
+    partial: 'televisions/list',
+    locals: { televisions: @televisions }
+  ) %>
+</div>
+

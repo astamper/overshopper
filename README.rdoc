@@ -24,7 +24,18 @@ Things you may want to cover:
 * ...
 
 
-
+<div class="hidden-xs nav nav-pills nav-stacked menu">
+    <a href="#price">Img 1</a>
+    <a href="#resolution">Img 2</a>
+    <a href="#size">Img 3</a>
+    <a href="#brand">Img 4</a>
+    <a href="#5">Img 5</a>
+    <a href="#">Img 6</a>
+    <a href="#">Img 7</a>
+    <a href="#">Img 8</a>
+    <a href="#">Img 9</a>
+    <a href="#">Img 10</a>
+</div>
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

@@ -1,0 +1,7 @@
+<div style="padding:50px;">
+<%= form_for_filterrific @filterrific do |f| %>
+      <div class="row">
+        <%= f.select(:with_brand, @filterrific.select_options[:with_brand], {include_blank: '- Any -' }, { :class => 'form-control' })%>
+      </div>
+<% end %>
+</div>

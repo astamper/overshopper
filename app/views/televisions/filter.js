@@ -1,6 +1,6 @@
 <% js = escape_javascript(
   render(
-    :partial => 'televisions/modelcount',
+    :partial => 'televisions/navigation/modelcount',
   )
 ) %>
 $("#results").html("<%= js %>");

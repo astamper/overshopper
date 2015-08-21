@@ -1,37 +1,35 @@
 class Television < ActiveRecord::Base
-
-  filterrific :default_filter_params => { :sorted_by => 'regularprice_desc' },
-              :available_filters => %w[
+  filterrific default_filter_params: { sorted_by: 'regularprice_desc' },
+              available_filters: %w(
                 sorted_by
                 search_query
                 with_brand
                 with_test
                 with_regularprice
-              ]
+              )
 
   # default for will_paginate
   self.per_page = 10
 
   scope :search_query, lambda { |query|
-    return nil  if query.blank?
+    return nil if query.blank?
     # condition query, parse into individual keywords
     terms = query.downcase.split(/\s+/)
     # replace "*" with "%" for wildcard searches,
     # append '%', remove duplicate '%'s
-    terms = terms.map { |e|
-      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
-    }
+    terms = terms.map { |e| (e.gsub('*', '%') + '%').gsub(/%+/, '%') }
     # configure number of OR conditions for provision
     # of interpolation arguments. Adjust this if you
     # change the number of OR conditions.
-    num_or_conditions = 2
+    num_or_conditions = 3
     where(
       terms.map {
         or_clauses = [
-          "LOWER(televisions.name) LIKE ?",
-          "LOWER(televisions.brand) LIKE ?"
+          'LOWER(televisions.name) LIKE ?',
+          'LOWER(televisions.brand) LIKE ?',
+          'LOWER(televisions.description) LIKE ?'
         ].join(' OR ')
-        "(#{ or_clauses })"
+        "(#{or_clauses})"
       }.join(' AND '),
       *terms.map { |e| [e] * num_or_conditions }.flatten
     )
@@ -42,30 +40,30 @@ class Television < ActiveRecord::Base
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
     case sort_option.to_s
     when /^regularprice_/
-      order("televisions.regularprice #{ direction }")
+      order("televisions.regularprice #{direction}")
     when /^brand_/
-      order("LOWER(televisions.brand) #{ direction }")
+      order("LOWER(televisions.brand) #{direction}")
     when /^name_/
-      order("LOWER(televisions.name) #{ direction }")
+      order("LOWER(televisions.name) #{direction}")
     else
-      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+      fail(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
     end
   }
   scope :with_brand, lambda { |brands|
-    where(:brand => [*brands])
+    where(brand: [*brands])
   }
   scope :with_regularprice, lambda { |ref_price|
     where('televisions.regularprice >= ?', ref_price)
   }
   scope :with_test, lambda { |check|
     if 1 == check
-      return where(:tvtype => "LED")
+      return where(tvtype: 'LED')
     else
       return nil
     end
   }
 
-  delegate :name, :to => :brand, :prefix => true
+  delegate :name, to: :brand, prefix: true
 
   def self.options_for_sorted_by
     [
@@ -81,7 +79,6 @@ class Television < ActiveRecord::Base
   end
 
   def self.options_for_select
-    order('LOWER(brand)').map{ |e| [e.brand] }.uniq
-
+    order('LOWER(brand)').map { |e| [e.brand] }.uniq
   end
 end

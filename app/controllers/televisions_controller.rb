@@ -1,14 +1,14 @@
 class TelevisionsController < ApplicationController
   def filter
-  @filterrific = initialize_filterrific(
+    @filterrific = initialize_filterrific(
       Television,
       params[:filterrific],
-      :select_options => {
+      select_options: {
         sorted_by: Television.options_for_sorted_by,
         with_brand: Television.options_for_select
       },
-      persistence_id: "agaragar"
-      ) or return
+      persistence_id: 'agaragar'
+    ) || return
     @televisions = @filterrific.find.page(params[:page])
 
     respond_to do |format|
@@ -16,16 +16,17 @@ class TelevisionsController < ApplicationController
       format.js
     end
   end
+
   def result
     @filterrific = initialize_filterrific(
       Television,
       params[:filterrific],
-      :select_options => {
+      select_options: {
         sorted_by: Television.options_for_sorted_by,
         with_brand: Television.options_for_select
       },
-      persistence_id: "agaragar"
-      ) or return
+      persistence_id: 'agaragar'
+    ) || return
     @televisions = @filterrific.find.page(params[:page])
 
     respond_to do |format|
@@ -33,9 +34,7 @@ class TelevisionsController < ApplicationController
       format.js
     end
   end
+
   def product
   end
-
-
 end
-
